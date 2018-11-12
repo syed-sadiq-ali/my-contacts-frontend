@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
   render() {
@@ -6,7 +7,9 @@ class Login extends Component {
       <div>
         <p>Welcome to My Contacts!</p>
         <p>Log in to view your contacts</p>
-        <button>Log in</button>
+        <Link to="/home">
+          <button>Log in</button>
+        </Link>
       </div>
     );
   }
