@@ -7,6 +7,8 @@ class NavBar extends Component {
         <button onClick={this.props.logout} className="button">
             Log out
         </button>
+        <br />
+        <br />
     </div>
 );
   }

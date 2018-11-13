@@ -10,7 +10,8 @@ class Home extends Component {
         <li>Create New Contact Button</li>
         ************************************
         <li>List All Contacts</li>
-        <li>Sign Out Button</li>
+        <li>Apply CSS</li>
+        <li>Use redirect for routing</li>
         </ol>
       </div>
     );
