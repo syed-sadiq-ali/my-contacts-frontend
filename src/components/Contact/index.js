@@ -7,6 +7,8 @@ class Contact extends Component {
       <div>
         <h4>{`${firstName} ${lastName}`}</h4>
         <p>{`${mobileNumber}, ${email}, ${work}`}</p>
+        <button>Edit</button> <span></span>
+        <button>Delete</button>
       </div>
 );
   }

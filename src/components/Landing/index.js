@@ -7,7 +7,7 @@ class Landing extends Component {
     const { onSuccess, onFailure } = this.props;
     return(
       <div>
-        <p>Welcome to My Contacts!</p>
+        <p>Welcome to My Contacts - Now you can save all your contacts in one place</p>
         <p>Log in to view your contacts</p>
         <GoogleLogin
           clientId={config.GOOGLE_CLIENT_ID}

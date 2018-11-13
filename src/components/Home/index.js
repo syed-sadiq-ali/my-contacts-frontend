@@ -51,6 +51,7 @@ class Home extends Component {
     contacts = this.getSearchContacts(contacts);
     return(
       <div>
+        <label>Search Contacts: </label>
         <input 
           type="text"
           value={this.state.searchValue}
@@ -64,10 +65,13 @@ class Home extends Component {
         <br />
         TODO:
         <ol>
-        <li>Search Bar</li>
         <li>Create New Contact Button</li>
         <li>Apply CSS</li>
         <li>Use redirect for routing</li>
+        <li>Move Search Bar as a separate component</li>
+        <li>API Calls</li>
+        <li>Better error handling from API</li>
+        <li>Code Review</li>
         </ol>
       </div>
     );

@@ -41,6 +41,7 @@ class Login extends Component {
   };
   
   onFailure = (error) => {
+    console.log(error);
     alert(error);
   }
 
