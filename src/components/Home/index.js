@@ -65,7 +65,6 @@ class Home extends Component {
         <br />
         TODO:
         <ol>
-        <li>Create New Contact Button</li>
         <li>Apply CSS</li>
         <li>Use redirect for routing</li>
         <li>Move Search Bar as a separate component</li>

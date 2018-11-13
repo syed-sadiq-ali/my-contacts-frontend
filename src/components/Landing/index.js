@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import config from '../../config.json';
+import { GoogleLoginButton } from 'react-social-login-buttons';
 
 class Landing extends Component {
   render() {
@@ -11,10 +12,11 @@ class Landing extends Component {
         <p>Log in to view your contacts</p>
         <GoogleLogin
           clientId={config.GOOGLE_CLIENT_ID}
-          buttonText="Login"
           onSuccess={onSuccess}
           onFailure={onFailure}
-        />
+        >
+          <GoogleLoginButton />
+        </GoogleLogin>
       </div>
     );
   }
