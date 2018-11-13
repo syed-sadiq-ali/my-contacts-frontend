@@ -26,7 +26,7 @@ class Login extends Component {
     //     mode: 'cors',
     //     cache: 'default'
     // };
-    // fetch('http://localhost:4000/api/v1/auth/google', options).then(r => {
+    // fetch('http://172.16.1.3:4000/api/v1/auth/google', options).then(r => {
     //     const token = r.headers.get('x-auth-token');
     //     r.json().then(user => {
     //         if (token) {
