@@ -67,7 +67,7 @@ class Home extends Component {
         <ol>
         <li>Apply CSS</li>
         <li>Use redirect for routing</li>
-        <li>Move Search Bar as a separate component</li>
+        <li>Refactor Search Bar as a separate component</li>
         <li>API Calls</li>
         <li>Better error handling from API</li>
         <li>Code Review</li>

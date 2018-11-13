@@ -1,3 +1,5 @@
 .App {
+  background-image: url('./background.jpg');
+  background-color: #cccccc;
   text-align: center;
 }

@@ -19,6 +19,7 @@ class Login extends Component {
   };
 
   googleResponse = (response) => {
+    console.log(response);
     // const tokenBlob = new Blob([JSON.stringify({access_token: response.accessToken}, null, 2)], {type : 'application/json'});
     // const options = {
     //     method: 'POST',
@@ -63,9 +64,6 @@ class Login extends Component {
       return(
       <div>
         {content}
-        {/* <Link to="/home">
-          <button>Log in</button>
-        </Link> */}
       </div>
     );
   }
