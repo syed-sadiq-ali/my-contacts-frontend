@@ -65,16 +65,16 @@ class Home extends Component {
         <br />
         TODO:
         <ol>
-        <li>Remove login from FE</li>
-        <li>Use material UI</li>
-        <li>Use redirect for routing</li>
-        <li>Refactor Search Bar as a separate component</li>
-        <li>API Calls</li>
-        <li>Better error handling from API</li>
-        <li>Code Review</li>
-        <li>Handling corner cases</li>
-        <li>Add Form validations</li>
-        <li>Add and Edit should be the same form with conditional rendering</li>
+          <li>Remove login from FE</li>
+          <li>Use material UI</li>
+          <li>Use redirect for routing</li>
+          <li>Refactor Search Bar as a separate component</li>
+          <li>API Calls</li>
+          <li>Better error handling from API</li>
+          <li>Code Review</li>
+          <li>Handling corner cases</li>
+          <li>Add Form validations</li>
+          <li>Add and Edit should be the same form with conditional rendering</li>
         </ol>
       </div>
     );

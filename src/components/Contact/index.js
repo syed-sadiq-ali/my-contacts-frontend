@@ -9,6 +9,9 @@ class Contact extends Component {
       isEditOpen: false,
       isDeleteOpen: false,
     };
+
+    this.handleEditSubmit = this.handleEditSubmit.bind(this);
+    this.handleDeleteSubmit = this.handleDeleteSubmit.bind(this);
   }
 
   toggleEditModal = () => {
@@ -23,6 +26,16 @@ class Contact extends Component {
     });
   };
 
+  handleEditSubmit(contact) {
+    console.log(contact);
+    this.toggleEditModal();
+  }
+
+  handleDeleteSubmit(contact) {
+    console.log(contact);
+    this.toggleDeleteModal();
+  }
+
   render() {
     const { firstName, lastName, mobileNumber, email, work } = this.props.contact;
     return(
@@ -35,11 +48,14 @@ class Contact extends Component {
         <EditContactModal
           open={this.state.isEditOpen}
           onClose={this.toggleEditModal}
+          onSubmit={this.handleEditSubmit}
           contact={this.props.contact}
         />
         <DeleteContactModal
           open={this.state.isDeleteOpen}
           onClose={this.toggleDeleteModal}
+          onSubmit={this.handleDeleteSubmit}
+          contact={this.props.contact}
         />
       </div>
 );

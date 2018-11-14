@@ -29,7 +29,7 @@ class EditContactModal extends React.Component {
   }
 
   render() {
-    const { open, onClose } = this.props;
+    const { open, onClose, onSubmit } = this.props;
     const { firstName, lastName, mobileNumber, email, work } = this.state.contact;
 
     return (
@@ -92,8 +92,8 @@ class EditContactModal extends React.Component {
           <Button onClick={onClose} color="secondary">
             Cancel
           </Button>
-          <Button onClick={onClose} color="primary">
-            Edit
+          <Button onClick={() => onSubmit(this.state.contact)} color="primary">
+            Save
           </Button>
         </DialogActions>
       </Dialog>

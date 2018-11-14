@@ -15,6 +15,11 @@ class ContactList extends Component {
     });
   }
 
+  onSubmit = (contact) => {
+    console.log(contact);
+    this.toggleModal();
+  };
+
   render() {
     const { contacts } = this.props;
     return(
@@ -29,6 +34,7 @@ class ContactList extends Component {
         <AddContactModal
           open={this.state.isOpen}
           onClose={this.toggleModal}
+          onSubmit={this.onSubmit}
         />
       </div>
 );

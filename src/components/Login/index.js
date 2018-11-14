@@ -19,6 +19,16 @@ class Login extends Component {
   };
 
   googleResponse = (response) => {
+    const options = {
+        method: 'GET',
+        // mode: 'cors',
+        // cache: 'default',
+    };
+    fetch('http://172.16.1.3:4000/auth/google', options)
+    .then(r => {
+      console.log(r);
+    })
+    .catch(this.onFailure);
     // const tokenBlob = new Blob([JSON.stringify({access_token: response.accessToken}, null, 2)], {type : 'application/json'});
     // const options = {
     //     method: 'POST',
@@ -42,7 +52,6 @@ class Login extends Component {
   
   onFailure = (error) => {
     console.log(error);
-    alert(error);
   }
 
   render() {
@@ -56,7 +65,7 @@ class Login extends Component {
       ) :
       (
           <div>
-            <Landing onSuccess={this.googleResponse} onFailure={this.onFailure}/>
+            <Landing onSuccess={this.googleResponse} />
           </div>
       );
 
