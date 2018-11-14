@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import config from '../../config.json';
-import { GoogleLoginButton } from 'react-social-login-buttons';
+// import { GoogleLoginButton } from 'react-social-login-buttons';
 
 class Landing extends Component {
   render() {
@@ -15,7 +15,7 @@ class Landing extends Component {
           onSuccess={onSuccess}
           onFailure={onFailure}
         >
-          <GoogleLoginButton />
+          {/* <GoogleLoginButton /> */}
         </GoogleLogin>
       </div>
     );

@@ -71,6 +71,9 @@ class Home extends Component {
         <li>API Calls</li>
         <li>Better error handling from API</li>
         <li>Code Review</li>
+        <li>Handling corner cases</li>
+        <li>Add Form validations</li>
+        <li>Add and Edit should be the same form with conditional rendering</li>
         </ol>
       </div>
     );
