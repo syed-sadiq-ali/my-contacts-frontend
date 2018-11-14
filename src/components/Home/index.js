@@ -7,11 +7,17 @@ class Home extends Component {
 
     this.state = {
       searchValue: '',
+      contacts: [],
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.getContacts = this.getContacts.bind(this);
+    this.someHandler = this.someHandler.bind(this);
   }
 
+  componentDidMount() {
+    this.getContacts();
+  }
   handleChange(event) {
     this.setState({searchValue: event.target.value});
   }
@@ -31,23 +37,63 @@ class Home extends Component {
     return newContacts;
   }
 
-  render() {
-    let contacts = [
+  async getContacts() {
+    console.log('Get contacts')
+    let contacts = [];
+    const access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViZWMyNWNjMTRkM2U2NDI4OGZiZDJmOCIsIm5hbWUiOiJIYW16YSBTaGFoaWQiLCJlbWFpbCI6ImFobWVkaGFtemExOTk1QGdtYWlsLmNvbSIsImlhdCI6MTU0MjIwNjU3NCwiZXhwIjoxNTQyMjQyNTc0fQ.MUfvBDqBn-b0YTVPV0z7VzRco4JcVlKZaOsrvAwMT0c';
+    const myHeaders = new Headers(
       {
-        firstName: 'Sadiq',
-        lastName: 'Ali',
-        mobileNumber: '12345',
-        email: 'abc@gmail.com',
-        work: '10Pearls',
-      },
-      {
-        firstName: 'Umar',
-        lastName: 'Usman',
-        mobileNumber: '0987756',
-        email: 'umar@gmail.com',
-        work: '10Pearls',
+        'access-token': access_token,
       }
-    ];
+    );
+    const url = 'http://172.16.1.3:4000/contact/';
+    const options = {
+      method: 'GET',
+      headers: myHeaders,
+    };
+
+    await fetch(url, options)
+    .then(r => r.json())
+    .then(r => {
+      contacts = r.data.contacts;
+      console.log(contacts);
+    } )
+    .catch(error => console.log(error));
+
+    this.setState({ 
+      ...this.state,
+      contacts,
+    });
+    console.log(this.state.contacts);
+  }
+
+  async deleteContact(contact_id) {
+    const access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViZWMyNWNjMTRkM2U2NDI4OGZiZDJmOCIsIm5hbWUiOiJIYW16YSBTaGFoaWQiLCJlbWFpbCI6ImFobWVkaGFtemExOTk1QGdtYWlsLmNvbSIsImlhdCI6MTU0MjIwNjU3NCwiZXhwIjoxNTQyMjQyNTc0fQ.MUfvBDqBn-b0YTVPV0z7VzRco4JcVlKZaOsrvAwMT0c';
+    const myHeaders = new Headers(
+      {
+        'access-token': access_token,
+      }
+    );
+    const url = `http://172.16.1.3:4000/contact/${contact_id}`;
+    const options = {
+      method: 'DELETE',
+      headers: myHeaders,
+    };
+
+    await fetch(url, options)
+    .then(r => r.json())
+    .then(r => {
+      console.log(r);
+    } )
+    .catch(error => console.log(error));
+  }
+
+  someHandler() {
+    this.getContacts();
+  }
+
+  render() {
+    let contacts = this.state.contacts;
     contacts = this.getSearchContacts(contacts);
     return(
       <div>
@@ -58,7 +104,11 @@ class Home extends Component {
           onChange={this.handleChange}
         />
 
-        <ContactList contacts={contacts}/>
+        <ContactList
+          contacts={contacts}
+          deleteContact={this.deleteContact}
+          someHandler={this.someHandler}
+        />
 
         <br />
         <br />

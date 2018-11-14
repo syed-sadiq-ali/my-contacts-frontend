@@ -21,14 +21,19 @@ class ContactList extends Component {
   };
 
   render() {
-    const { contacts } = this.props;
+    const { contacts, deleteContact, someHandler } = this.props;
     return(
       <div>
         <h2>Contacts List</h2>
         <button onClick={this.toggleModal}>New Contact</button>        
         {
           contacts.map((contact, id) => {
-            return <Contact contact={contact} key={id} />
+            return <Contact
+             contact={contact} 
+             key={id}
+             deleteContact={deleteContact}
+             someHandler={someHandler}
+            />
           })
         }
         <AddContactModal

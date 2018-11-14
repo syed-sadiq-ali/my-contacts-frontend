@@ -32,13 +32,16 @@ class Contact extends Component {
   }
 
   handleDeleteSubmit(contact) {
-    console.log(contact);
+    this.props.deleteContact(contact._id);
     this.toggleDeleteModal();
+    this.props.someHandler();
+    // trigger an action to update props.contact
   }
 
   render() {
-    const { firstName, lastName, mobileNumber, email, work } = this.props.contact;
+    const { firstName, lastName, mobileNumber, email, work, _id } = this.props.contact;
     return(
+      _id &&
       <div>
         <h4>{`${firstName} ${lastName}`}</h4>
         <p>{`${mobileNumber}, ${email}, ${work}`}</p>
