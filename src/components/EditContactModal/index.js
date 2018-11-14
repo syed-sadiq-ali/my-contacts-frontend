@@ -4,23 +4,42 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-class AddContactFormModal extends React.Component {
+class EditContactModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      contact: props.contact,
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    const id = event.target.id;
+    const value = event.target.value;
+    this.setState(
+      {
+        contact: {
+          ...this.state.contact,
+          [id]: value,
+        }
+      }
+    );
+  }
+
   render() {
-    const { show, onClose } = this.props;
+    const { open, onClose } = this.props;
+    const { firstName, lastName, mobileNumber, email, work } = this.state.contact;
+
     return (
       <Dialog
-        open={show}
+        open={open}
         onClose={onClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Add Contact</DialogTitle>
+        <DialogTitle id="form-dialog-title">Edit Contact</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            To add a contact, please enter the following information.
-          </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
@@ -29,7 +48,8 @@ class AddContactFormModal extends React.Component {
             type="text"
             fullWidth
             required
-            placeholder="Sadiq"
+            value={firstName}
+            onChange={this.handleChange}
           />
           <TextField
             margin="dense"
@@ -37,7 +57,8 @@ class AddContactFormModal extends React.Component {
             label="Last Name"
             type="text"
             fullWidth
-            placeholder="Ali"
+            value={lastName}
+            onChange={this.handleChange}
           />
           <TextField
             margin="dense"
@@ -45,7 +66,8 @@ class AddContactFormModal extends React.Component {
             label="Mobile Number"
             type="text"
             fullWidth
-            placeholder="0345-1234567"
+            value={mobileNumber}
+            onChange={this.handleChange}
           />
           <TextField
             margin="dense"
@@ -53,7 +75,8 @@ class AddContactFormModal extends React.Component {
             label="Email Address"
             type="email"
             fullWidth
-            placeholder="sadiq.ali@tenpearls.com"
+            value={email}
+            onChange={this.handleChange}
           />
           <TextField
             margin="dense"
@@ -61,7 +84,8 @@ class AddContactFormModal extends React.Component {
             label="Organization"
             type="text"
             fullWidth
-            placeholder="10Pearls"
+            value={work}
+            onChange={this.handleChange}
           />
         </DialogContent>
         <DialogActions>
@@ -69,7 +93,7 @@ class AddContactFormModal extends React.Component {
             Cancel
           </Button>
           <Button onClick={onClose} color="primary">
-            Add
+            Edit
           </Button>
         </DialogActions>
       </Dialog>
@@ -77,4 +101,4 @@ class AddContactFormModal extends React.Component {
   }
 }
 
-export default AddContactFormModal;
+export default EditContactModal;

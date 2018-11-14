@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Contact from '../Contact';
-import AddContactFormModal from '../AddContactFormModal';
+import AddContactModal from '../AddContactModal';
 
 class ContactList extends Component {
   constructor(){
@@ -20,17 +20,16 @@ class ContactList extends Component {
     return(
       <div>
         <h2>Contacts List</h2>
-        <button onClick={this.toggleModal}>New Contact</button>
-        <AddContactFormModal
-          show={this.state.isOpen}
-          onClose={this.toggleModal}
-        />
-        
+        <button onClick={this.toggleModal}>New Contact</button>        
         {
           contacts.map((contact, id) => {
             return <Contact contact={contact} key={id} />
           })
         }
+        <AddContactModal
+          open={this.state.isOpen}
+          onClose={this.toggleModal}
+        />
       </div>
 );
   }

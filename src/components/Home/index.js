@@ -65,7 +65,8 @@ class Home extends Component {
         <br />
         TODO:
         <ol>
-        <li>Apply CSS</li>
+        <li>Remove login from FE</li>
+        <li>Use material UI</li>
         <li>Use redirect for routing</li>
         <li>Refactor Search Bar as a separate component</li>
         <li>API Calls</li>
