@@ -61,15 +61,17 @@ class AddContactModal extends React.Component {
             fullWidth
             placeholder="Ali"
             onChange={this.handleChange}
+            required
           />
           <TextField
             margin="dense"
             id="mobileNumber"
             label="Mobile Number"
-            type="text"
+            type="number"
             fullWidth
             placeholder="0345-1234567"
             onChange={this.handleChange}
+            required
           />
           <TextField
             margin="dense"

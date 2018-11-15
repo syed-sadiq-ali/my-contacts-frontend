@@ -27,15 +27,16 @@ class Contact extends Component {
   };
 
   handleEditSubmit(contact) {
-    console.log(contact);
+    this.props.editContact(contact);
     this.toggleEditModal();
+    this.props.someHandler();
   }
 
   handleDeleteSubmit(contact) {
     this.props.deleteContact(contact._id);
     this.toggleDeleteModal();
-    this.props.someHandler();
     // trigger an action to update props.contact
+    this.props.someHandler();
   }
 
   render() {
