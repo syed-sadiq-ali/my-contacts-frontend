@@ -9,7 +9,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 class DeleteContactModal extends React.Component {
   
   render() {
-    const { open, onClose, onSubmit } = this.props;
+    const { open, onClose, onSubmit, contact } = this.props;
 
     return (
       <Dialog
@@ -20,7 +20,7 @@ class DeleteContactModal extends React.Component {
         <DialogTitle id="form-dialog-title">Delete Contact</DialogTitle>
         <DialogContent>
           <DialogContentText>
-              Are you sure you want to delete?
+              Are you sure you want to delete {contact.firstName}?
           </DialogContentText>
         </DialogContent>
         <DialogActions>

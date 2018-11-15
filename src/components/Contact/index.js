@@ -29,6 +29,7 @@ class Contact extends Component {
   };
 
   handleEditSubmit(contact) {
+    Object.keys(contact).forEach((key) => (contact[key] === null || contact[key] === '') && delete contact[key]);
     this.props.editContact(contact);
     this.props.someHandler();
     this.toggleEditModal();

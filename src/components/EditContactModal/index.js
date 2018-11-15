@@ -48,7 +48,7 @@ class EditContactModal extends React.Component {
             type="text"
             fullWidth
             required
-            value={firstName}
+            value={firstName || ''}
             onChange={this.handleChange}
           />
           <TextField
@@ -57,7 +57,7 @@ class EditContactModal extends React.Component {
             label="Last Name"
             type="text"
             fullWidth
-            value={lastName}
+            value={lastName || ''}
             onChange={this.handleChange}
           />
           <TextField
@@ -66,7 +66,7 @@ class EditContactModal extends React.Component {
             label="Mobile Number"
             type="text"
             fullWidth
-            value={mobileNumber}
+            value={mobileNumber || ''}
             onChange={this.handleChange}
           />
           <TextField
@@ -75,7 +75,7 @@ class EditContactModal extends React.Component {
             label="Email Address"
             type="email"
             fullWidth
-            value={email}
+            value={email || ''}
             onChange={this.handleChange}
           />
           <TextField
@@ -84,7 +84,7 @@ class EditContactModal extends React.Component {
             label="Organization"
             type="text"
             fullWidth
-            value={work}
+            value={work || ''}
             onChange={this.handleChange}
           />
         </DialogContent>

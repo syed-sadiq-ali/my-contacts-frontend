@@ -90,6 +90,34 @@ class Home extends Component {
     .catch(error => console.log(error));
   }
 
+  // Handlers not being used anywhere rn
+  updateStateOnDelete(deletedContact) {
+    let updatedContacts = this.state.contacts.filter((contact) => contact._id !== deletedContact._id);
+    this.setState({
+      contacts: updatedContacts,
+    });
+    this.forceUpdate();
+  }
+
+  updateStateOnCreate(newContact) {
+    let updatedContacts = this.state.contacts;
+    updatedContacts.push(newContact);
+    this.setState({
+      contacts: updatedContacts,
+    });
+    this.forceUpdate();
+  }
+
+  updateStateOnEdit(newContact) {
+    let updatedContacts = this.state.contacts;
+    const index = updatedContacts.findIndex(contact => contact._id === newContact._id);
+    updatedContacts[index] = newContact;
+    this.setState({
+      contacts: updatedContacts,
+    });
+    this.forceUpdate();
+  }
+
   async editContact(contact) {
     let reqBody = JSON.stringify(contact, null, 2);
     const contactBlob = new Blob([reqBody], {type : 'application/json'});
