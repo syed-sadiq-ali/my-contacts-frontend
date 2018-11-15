@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 
 class NavBar extends Component {
   render() {
+    const { user, logout } = this.props;
     return(
       <div>
-        <button onClick={this.props.logout} className="button">
+        <p>Hello, <strong>{user.name}!</strong></p>
+        <button onClick={logout}>
             Log out
         </button>
         <br />

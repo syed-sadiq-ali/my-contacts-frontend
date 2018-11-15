@@ -34,9 +34,12 @@ class ContactList extends Component {
 
     await fetch(url, options)
     .then(r => r.json())
-    .then(r => {
-      // console.log(r);
-    } )
+    .then(function(response){
+      if(response.meta.status !== 200) {
+        console.log(`Error: ${response.meta.message}`);
+        alert(`Error: ${response.meta.message}`);
+      }
+    })
     .catch(error => console.log(error));
   }
 

@@ -5,8 +5,11 @@ class Landing extends Component {
     const { onSuccess } = this.props;
     return(
       <div>
-        <p>Welcome to My Contacts - Now you can save all your contacts in one place</p>
-        <p>Log in to view your contacts</p>
+        <h1>Welcome to My Contacts</h1>
+        <h2>One place for all your contacts</h2>
+        <br />
+        <br />
+        <h3>Log in to view your contacts</h3>
         <button onClick={onSuccess}>Log in</button>
       </div>
     );

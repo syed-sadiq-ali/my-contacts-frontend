@@ -7,7 +7,7 @@ import Landing from '../Landing';
 class Login extends Component {
   constructor() {
     super();
-    this.state = { isAuthenticated: false, user: null, token: ''};
+    this.state = { isAuthenticated: false, user: null, accessToken: ''};
 
     this.logout = this.logout.bind(this);
     this.googleResponse = this.googleResponse.bind(this);
@@ -44,8 +44,8 @@ class Login extends Component {
     // })
     //remove the following lines once backend authentication API is running
     const user = { email: 'abc@gmail.com', name: 'Sadiq' };
-    const token = 'nice_token';
-    this.setState({isAuthenticated: true, user, token});
+    const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViZWMyNWNjMTRkM2U2NDI4OGZiZDJmOCIsIm5hbWUiOiJIYW16YSBTaGFoaWQiLCJlbWFpbCI6ImFobWVkaGFtemExOTk1QGdtYWlsLmNvbSIsImlhdCI6MTU0MjI1NjA2NiwiZXhwIjoxNTQyMjkyMDY2fQ.LMn89wSYshBib2EWqVoZ5sJib2d6oZH5jRbPxtLy_eI';
+    this.setState({isAuthenticated: true, user, accessToken});
   };
   
   onFailure = (error) => {
@@ -53,12 +53,11 @@ class Login extends Component {
   }
 
   render() {
-    // !! is used to convert a value to a Boolean type, not necessary here
-    let content = !!this.state.isAuthenticated ?
+    let content = this.state.isAuthenticated ?
       (
           <div>
-            <NavBar logout={this.logout}/>
-            <Home />
+            <NavBar user={this.state.user} logout={this.logout}/>
+            <Home accessToken={this.state.accessToken} />
           </div>
       ) :
       (

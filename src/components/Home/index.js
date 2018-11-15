@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ContactList from '../ContactList';
+import { backendUrl, httpMethods } from '../../constants';
 
 class Home extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class Home extends Component {
       contacts: [],
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleSearchValueChange = this.handleSearchValueChange.bind(this);
     this.getContacts = this.getContacts.bind(this);
     this.someHandler = this.someHandler.bind(this);
   }
@@ -19,7 +20,7 @@ class Home extends Component {
     this.getContacts();
   }
 
-  handleChange(event) {
+  handleSearchValueChange(event) {
     this.setState({searchValue: event.target.value});
   }
 
@@ -39,26 +40,23 @@ class Home extends Component {
   }
 
   async getContacts() {
-    console.log('Get contacts')
     let contacts = [];
-    const access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViZWMyNWNjMTRkM2U2NDI4OGZiZDJmOCIsIm5hbWUiOiJIYW16YSBTaGFoaWQiLCJlbWFpbCI6ImFobWVkaGFtemExOTk1QGdtYWlsLmNvbSIsImlhdCI6MTU0MjI1NjA2NiwiZXhwIjoxNTQyMjkyMDY2fQ.LMn89wSYshBib2EWqVoZ5sJib2d6oZH5jRbPxtLy_eI';
+    const accessToken = this.props.accessToken;
     const myHeaders = new Headers(
       {
-        'access-token': access_token,
+        'access-token': accessToken,
       }
     );
-    const url = 'http://172.16.1.3:4000/contact/';
+    const url = backendUrl;
     const options = {
-      method: 'GET',
+      method: httpMethods.GET,
       headers: myHeaders,
-      cache: 'no-store',
     };
 
     await fetch(url, options)
     .then(r => r.json())
     .then(r => {
       contacts = r.data.contacts;
-      console.log(contacts);
     } )
     .catch(error => console.log(error));
 
@@ -66,7 +64,6 @@ class Home extends Component {
       ...this.state,
       contacts,
     });
-    console.log(this.state.contacts);
   }
 
   async deleteContact(contact_id) {
@@ -84,9 +81,12 @@ class Home extends Component {
 
     await fetch(url, options)
     .then(r => r.json())
-    .then(r => {
-      console.log(r);
-    } )
+    .then(function(response){
+      if(response.meta.status !== 200) {
+        console.log(`Error: ${response.meta.message}`);
+        alert(`Error: ${response.meta.message}`);
+      }
+    })
     .catch(error => console.log(error));
   }
 
@@ -108,9 +108,12 @@ class Home extends Component {
 
     await fetch(url, options)
     .then(r => r.json())
-    .then(r => {
-      // console.log(r);
-    } )
+    .then(function(response){
+      if(response.meta.status !== 200) {
+        console.log(`Error: ${response.meta.message}`);
+        alert(`Error: ${response.meta.message}`);
+      }
+    })
     .catch(error => console.log(error));
   }
 
@@ -127,9 +130,9 @@ class Home extends Component {
         <input 
           type="text"
           value={this.state.searchValue}
-          onChange={this.handleChange}
+          onChange={this.handleSearchValueChange}
         />
-        <button onClick={this.someHandler}>Refresh contacts list</button>
+        <button onClick={this.someHandler}>Refresh state</button>
 
         <ContactList
           contacts={contacts}
@@ -143,12 +146,9 @@ class Home extends Component {
         <br />
         TODO:
         <ol>
-          <li>Remove login from FE</li>
           <li>Use material UI</li>
           <li>Use redirect for routing</li>
           <li>Refactor Search Bar as a separate component</li>
-          <li>API Calls</li>
-          <li>Better error handling from API</li>
           <li>Code Review</li>
           <li>Handling corner cases</li>
           <li>Add Form validations</li>
