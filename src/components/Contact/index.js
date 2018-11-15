@@ -12,6 +12,8 @@ class Contact extends Component {
 
     this.handleEditSubmit = this.handleEditSubmit.bind(this);
     this.handleDeleteSubmit = this.handleDeleteSubmit.bind(this);
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
+    this.toggleEditModal = this.toggleEditModal.bind(this);
   }
 
   toggleEditModal = () => {
@@ -28,24 +30,23 @@ class Contact extends Component {
 
   handleEditSubmit(contact) {
     this.props.editContact(contact);
-    this.toggleEditModal();
     this.props.someHandler();
+    this.toggleEditModal();
   }
 
   handleDeleteSubmit(contact) {
     this.props.deleteContact(contact._id);
-    this.toggleDeleteModal();
     // trigger an action to update props.contact
     this.props.someHandler();
+    this.toggleDeleteModal();
   }
 
   render() {
-    const { firstName, lastName, mobileNumber, email, work, _id } = this.props.contact;
+    const { firstName, lastName, mobileNumber, email, work } = this.props.contact;
     return(
-      _id &&
       <div>
         <h4>{`${firstName} ${lastName}`}</h4>
-        <p>{`${mobileNumber}, ${email}, ${work}`}</p>
+        <p>{`${mobileNumber}, ${email || 'No email provided'}, ${work || 'No organization provided'}`}</p>
         <button onClick={this.toggleEditModal}>Edit</button> <span></span>
         <button onClick={this.toggleDeleteModal}>Delete</button>
 
@@ -55,6 +56,7 @@ class Contact extends Component {
           onSubmit={this.handleEditSubmit}
           contact={this.props.contact}
         />
+
         <DeleteContactModal
           open={this.state.isDeleteOpen}
           onClose={this.toggleDeleteModal}

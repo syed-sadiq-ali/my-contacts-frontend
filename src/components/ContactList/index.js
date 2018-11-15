@@ -7,6 +7,7 @@ class ContactList extends Component {
     super();
     this.state = { isOpen: false };
     this.toggleModal = this.toggleModal.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   toggleModal = () => {
@@ -51,6 +52,7 @@ class ContactList extends Component {
       <div>
         <h2>Contacts List</h2>
         <button onClick={this.toggleModal}>New Contact</button>        
+        
         {
           contacts.map((contact, id) => {
             return <Contact
@@ -62,6 +64,7 @@ class ContactList extends Component {
             />
           })
         }
+
         <AddContactModal
           open={this.state.isOpen}
           onClose={this.toggleModal}

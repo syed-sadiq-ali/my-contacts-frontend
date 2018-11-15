@@ -69,7 +69,7 @@ class AddContactModal extends React.Component {
             label="Mobile Number"
             type="number"
             fullWidth
-            placeholder="0345-1234567"
+            placeholder="03451234567"
             onChange={this.handleChange}
             required
           />

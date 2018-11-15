@@ -18,6 +18,7 @@ class Home extends Component {
   componentDidMount() {
     this.getContacts();
   }
+
   handleChange(event) {
     this.setState({searchValue: event.target.value});
   }
@@ -50,6 +51,7 @@ class Home extends Component {
     const options = {
       method: 'GET',
       headers: myHeaders,
+      cache: 'no-store',
     };
 
     await fetch(url, options)
@@ -60,7 +62,7 @@ class Home extends Component {
     } )
     .catch(error => console.log(error));
 
-    this.setState({ 
+    this.setState({
       ...this.state,
       contacts,
     });
@@ -127,6 +129,7 @@ class Home extends Component {
           value={this.state.searchValue}
           onChange={this.handleChange}
         />
+        <button onClick={this.someHandler}>Refresh contacts list</button>
 
         <ContactList
           contacts={contacts}
@@ -135,7 +138,7 @@ class Home extends Component {
           someHandler={this.someHandler}
         />
 
-        <br />
+        {/* <br />
         <br />
         <br />
         TODO:
@@ -150,7 +153,7 @@ class Home extends Component {
           <li>Handling corner cases</li>
           <li>Add Form validations</li>
           <li>Add and Edit should be the same form with conditional rendering</li>
-        </ol>
+        </ol> */}
       </div>
     );
   }
