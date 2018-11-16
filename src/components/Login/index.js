@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Home from '../Home';
 import NavBar from '../NavBar';
 import Landing from '../Landing';
+import { backendUrl } from '../../constants'
 
 class Login extends Component {
   constructor() {
@@ -15,37 +16,34 @@ class Login extends Component {
   }
 
   logout = () => {
-    this.setState({isAuthenticated: false, token: '', user: null})
+    this.setState({isAuthenticated: false, accessToken: '', user: null})
   };
 
   googleResponse = (response) => {
-    // const options = {
-    //     method: 'GET',
-    // };
-    // fetch('http://172.16.1.3:4000/auth/google')
-    // .then(r => {
-    //   console.log(r);
-    // })
-    // .catch(this.onFailure);
-    // const tokenBlob = new Blob([JSON.stringify({access_token: response.accessToken}, null, 2)], {type : 'application/json'});
-    // const options = {
-    //     method: 'POST',
-    //     body: tokenBlob,
-    //     mode: 'cors',
-    //     cache: 'default'
-    // };
-    // fetch('http://172.16.1.3:4000/api/v1/auth/google', options).then(r => {
-    //     const token = r.headers.get('x-auth-token');
-    //     r.json().then(user => {
-    //         if (token) {
-    //             this.setState({isAuthenticated: true, user, token})
-    //         }
-    //     });
-    // })
-    //remove the following lines once backend authentication API is running
-    const user = { email: 'abc@gmail.com', name: 'Sadiq' };
-    const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViZWMyNWNjMTRkM2U2NDI4OGZiZDJmOCIsIm5hbWUiOiJIYW16YSBTaGFoaWQiLCJlbWFpbCI6ImFobWVkaGFtemExOTk1QGdtYWlsLmNvbSIsImlhdCI6MTU0MjI1NjA2NiwiZXhwIjoxNTQyMjkyMDY2fQ.LMn89wSYshBib2EWqVoZ5sJib2d6oZH5jRbPxtLy_eI';
-    this.setState({isAuthenticated: true, user, accessToken});
+    const { googleId, email, name } = response.profileObj;
+    const reqBody = {
+      name,
+      socialId: googleId,
+      email,
+    };
+    const reqBlob = new Blob([JSON.stringify(reqBody, null, 2)], { type: 'application/json' });
+    const options = {
+        method: 'POST',
+        body: reqBlob,
+    };
+    fetch(`${backendUrl}/user/`, options)
+    .then(r => r.json())
+    .then(response => {
+      const { accessToken } = response.data;
+      if(accessToken) {
+        const user = {
+          email,
+          name,
+        };
+        this.setState({ isAuthenticated: true, user, accessToken: accessToken });
+      }
+    })
+    .catch(e => console.log(e));
   };
   
   onFailure = (error) => {
@@ -62,7 +60,7 @@ class Login extends Component {
       ) :
       (
           <div>
-            <Landing onSuccess={this.googleResponse} />
+            <Landing onSuccess={this.googleResponse} onFailure={this.onFailure} />
           </div>
       );
 

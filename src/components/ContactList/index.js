@@ -19,7 +19,7 @@ class ContactList extends Component {
   async addContact(contact) {
     let reqBody = JSON.stringify(contact, null, 2);
     const contactBlob = new Blob([reqBody], {type : 'application/json'});
-    const access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViZWMyNWNjMTRkM2U2NDI4OGZiZDJmOCIsIm5hbWUiOiJIYW16YSBTaGFoaWQiLCJlbWFpbCI6ImFobWVkaGFtemExOTk1QGdtYWlsLmNvbSIsImlhdCI6MTU0MjI1NjA2NiwiZXhwIjoxNTQyMjkyMDY2fQ.LMn89wSYshBib2EWqVoZ5sJib2d6oZH5jRbPxtLy_eI';
+    const access_token = this.props.accessToken;
     const myHeaders = new Headers(
       {
         'access-token': access_token,

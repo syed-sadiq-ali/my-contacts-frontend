@@ -14,6 +14,8 @@ class Home extends Component {
     this.handleSearchValueChange = this.handleSearchValueChange.bind(this);
     this.getContacts = this.getContacts.bind(this);
     this.someHandler = this.someHandler.bind(this);
+    this.deleteContact = this.deleteContact.bind(this);
+    this.editContact = this.editContact.bind(this);
   }
 
   componentDidMount() {
@@ -47,7 +49,7 @@ class Home extends Component {
         'access-token': accessToken,
       }
     );
-    const url = backendUrl;
+    const url = `${backendUrl}/contact/`;
     const options = {
       method: httpMethods.GET,
       headers: myHeaders,
@@ -67,13 +69,13 @@ class Home extends Component {
   }
 
   async deleteContact(contact_id) {
-    const access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViZWMyNWNjMTRkM2U2NDI4OGZiZDJmOCIsIm5hbWUiOiJIYW16YSBTaGFoaWQiLCJlbWFpbCI6ImFobWVkaGFtemExOTk1QGdtYWlsLmNvbSIsImlhdCI6MTU0MjI1NjA2NiwiZXhwIjoxNTQyMjkyMDY2fQ.LMn89wSYshBib2EWqVoZ5sJib2d6oZH5jRbPxtLy_eI';
+    const access_token = this.props.accessToken;
     const myHeaders = new Headers(
       {
         'access-token': access_token,
       }
     );
-    const url = `http://172.16.1.3:4000/contact/${contact_id}`;
+    const url = `${backendUrl}/contact/${contact_id}`;
     const options = {
       method: 'DELETE',
       headers: myHeaders,
@@ -121,13 +123,13 @@ class Home extends Component {
   async editContact(contact) {
     let reqBody = JSON.stringify(contact, null, 2);
     const contactBlob = new Blob([reqBody], {type : 'application/json'});
-    const access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViZWMyNWNjMTRkM2U2NDI4OGZiZDJmOCIsIm5hbWUiOiJIYW16YSBTaGFoaWQiLCJlbWFpbCI6ImFobWVkaGFtemExOTk1QGdtYWlsLmNvbSIsImlhdCI6MTU0MjI1NjA2NiwiZXhwIjoxNTQyMjkyMDY2fQ.LMn89wSYshBib2EWqVoZ5sJib2d6oZH5jRbPxtLy_eI';
+    const access_token = this.props.accessToken;
     const myHeaders = new Headers(
       {
         'access-token': access_token,
       }
     );
-    const url = `http://172.16.1.3:4000/contact/${contact._id}`;
+    const url = `${backendUrl}/contact/${contact._id}`;
     const options = {
       method: 'PUT',
       headers: myHeaders,
@@ -167,6 +169,7 @@ class Home extends Component {
           deleteContact={this.deleteContact}
           editContact={this.editContact}
           someHandler={this.someHandler}
+          accessToken={this.props.accessToken}
         />
 
         {/* <br />
