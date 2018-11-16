@@ -42,7 +42,7 @@ class Home extends Component {
   }
 
   async getContacts() {
-    let contacts = [];
+    let newContacts = [];
     const accessToken = this.props.accessToken;
     const myHeaders = new Headers(
       {
@@ -58,13 +58,19 @@ class Home extends Component {
     await fetch(url, options)
     .then(r => r.json())
     .then(r => {
-      contacts = r.data.contacts;
+      const { contacts } = r.data;
+      if (contacts) {
+        newContacts = r.data.contacts;
+      }
+      else {
+        console.log('No contacts');
+      }
     } )
     .catch(error => console.log(error));
 
     this.setState({
       ...this.state,
-      contacts,
+      contacts: newContacts,
     });
   }
 
@@ -168,7 +174,6 @@ class Home extends Component {
           contacts={contacts}
           deleteContact={this.deleteContact}
           editContact={this.editContact}
-          someHandler={this.someHandler}
           accessToken={this.props.accessToken}
         />
 

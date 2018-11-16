@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Contact from '../Contact';
 import AddContactModal from '../AddContactModal';
+import { backendUrl } from '../../constants';
 
 class ContactList extends Component {
   constructor(){
@@ -25,7 +26,7 @@ class ContactList extends Component {
         'access-token': access_token,
       }
     );
-    const url = `http://172.16.1.3:4000/contact/`;
+    const url = `${backendUrl}/contact/`;
     const options = {
       method: 'POST',
       headers: myHeaders,
@@ -45,27 +46,28 @@ class ContactList extends Component {
 
   onSubmit = (contact) => {
     this.addContact(contact);
-    this.props.someHandler();
     this.toggleModal();
   };
 
   render() {
-    const { contacts, deleteContact, editContact, someHandler } = this.props;
+    const { contacts, deleteContact, editContact } = this.props;
     return(
       <div>
         <h2>Contacts List</h2>
         <button onClick={this.toggleModal}>New Contact</button>        
+        <br />
+        <br />
         
         {
-          contacts.map((contact, id) => {
+          contacts && contacts.length > 0 ? contacts.map((contact, id) => {
             return <Contact
-             contact={contact} 
+             contact={contact}
              key={id}
              deleteContact={deleteContact}
              editContact={editContact}
-             someHandler={someHandler}
             />
           })
+          : 'You do not have any contacts. Add one!'
         }
 
         <AddContactModal

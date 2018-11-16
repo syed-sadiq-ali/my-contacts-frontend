@@ -31,14 +31,11 @@ class Contact extends Component {
   handleEditSubmit(contact) {
     Object.keys(contact).forEach((key) => (contact[key] === null || contact[key] === '') && delete contact[key]);
     this.props.editContact(contact);
-    this.props.someHandler();
     this.toggleEditModal();
   }
 
   handleDeleteSubmit(contact) {
     this.props.deleteContact(contact._id);
-    // trigger an action to update props.contact
-    this.props.someHandler();
     this.toggleDeleteModal();
   }
 
